@@ -109,9 +109,9 @@ Etkinleştirildiğinde, oyuncuların yüklenmemiş parçalara geçmesini ve ana 
 
 #### entity-per-chunk-save-limit
 
-```
 İyi başlangıç değerleri:
 
+```
     area_effect_cloud: 8
     arrow: 16
     dragon_fireball: 3
@@ -150,9 +150,9 @@ Bir projektilin ömrü boyunca yükleyebileceği maksimum parça sayısını bel
 
 #### spawn-limits
 
-```
 İyi başlangıç değerleri:
 
+```
     monsters: 20
     animals: 5
     water-animals: 2
@@ -166,9 +166,9 @@ Yaratıkları sınırlamanın matematiği `[oyuncusayısı] * [limit]`, burada "
 
 #### ticks-per
 
-```
 İyi başlangıç değerleri:
 
+```
     monster-spawns: 10
     animal-spawns: 400
     water-spawns: 400
@@ -189,9 +189,9 @@ Yaratıkların oyuncunun etrafında hangi parçalarda doğacaklarının mesafesi
 
 #### entity-activation-range
 
-```
 İyi başlangıç değerleri:
 
+```
       animals: 16
       monsters: 24
       raiders: 48
@@ -205,9 +205,9 @@ Bir varlığın oyuncudan kaç blok uzaklıkta tikleneceğini (işlemlerini yapa
 
 #### entity-tracking-range
 
-```
 İyi başlangıç değerleri:
 
+```
       players: 48
       animals: 48
       monsters: 48
@@ -233,9 +233,9 @@ Bir canavar üretecinin doğurduğu yaratıkların AI'sını kaldırtabilirsiniz
 
 #### despawn-ranges
 
-```
 İyi başlangıç değerleri:
 
+```
       ambient:
         hard: 56
         soft: 30
@@ -304,9 +304,9 @@ Burada zırh duraklarının çarpışmalarını devre dışı bırakabilirsiniz.
 
 #### tick-rates
 
-```
 İyi başlangıç değerleri:
 
+```
   behavior:
     villager:
       validatenearbypoi: 60
@@ -388,10 +388,10 @@ Lobotomize edilmiş köylüler, yalnızca tekliflerini belirli aralıklarla yeni
 
 [paper-world Yapılandırması]
 alt-item-despawn-rate
-yaml
-Copy code
+
 İyi başlangıç ​​değerleri:
 
+```
       enabled: true
       items:
         cobblestone: 300
@@ -420,6 +420,8 @@ Copy code
         granite: 300
         andesite: 300
         scaffolding: 600
+```
+
 Bu liste, belirli türdeki düşen öğelerin varsayılan hızdan daha hızlı veya daha yavaş bir şekilde kaybolmasını ayarlamanıza olanak tanır. Bu seçenek, performansı artırmak için öğe temizleme eklentileri yerine kullanılabilir.
 
 redstone-implementation
@@ -428,26 +430,31 @@ redstone-implementation
 Kırmızı taş sistemini daha hızlı ve alternatif sürümlerle değiştirir, gereksiz blok güncellemelerini azaltarak sunucunuzun hesaplaması gereken mantık miktarını azaltır. Alternatif bir uygulama kullanmak, çok teknik kırmızı taş ile küçük tutarsızlıklara neden olabilir, ancak performans kazançları olası dar alandaki sorunların ötesindedir. ALTERNATE_CURRENT uygulaması Alternate Current moduna dayanır. Bu algoritma hakkında daha fazla bilgiye kaynak sayfalarında ulaşabilirsiniz.
 
 hopper.disable-move-event
-İyi başlangıç ​​değeri: false
+
+`İyi başlangıç ​​değeri: false`
 
 InventoryMoveItemEvent, bu olayı dinlemek için etkin bir eklentinin olmadığı durumda ateşlenmez. Bu, bu olaya tepki veren eklentilerinizin olması durumunda sadece bu değeri true olarak ayarlamanız gerektiğini gösterir. Bu olayı dinleyen eklentileri kullanmak istiyorsanız true olarak ayarlamayın, örneğin koruma eklentileri gibi!
 
 hopper.ignore-occluding-blocks
+
 `İyi başlangıç ​​değeri: true`
 
 Hoperların dolu blokları yoksayıp yoksaymayacağını belirler, örneğin kum veya çakıl bloğunun içindeki hoper madeni arabası. Bu seçenek etkin tutulursa, bazı mekanizmaların bu davranışa bağlı olduğu düzeltilebilir.
 
 tick-rates.mob-spawner
+
 `İyi başlangıç ​​değeri: 2`
 
 Bu seçenek, üreteçlerin ne sıklıkla işleneceğini yapılandırmanıza olanak tanır. Daha yüksek değerler, birçok üreteç varsa daha az gecikme sağlayabilir, ancak çok yüksek değerler (üreteç gecikmesine göre yüksek) mob spawn oranlarını düşürebilir.
 
 optimize-explosions
+
 `İyi başlangıç ​​değeri: true`
 
 Bu seçeneği true olarak ayarlarsanız, patlama algoritmasını daha hızlı bir sürümle değiştirir, ancak patlama zararı hesaplamalarında hafif bir sapma olabilir. Bu genellikle fark edilmez.
 
 treasure-maps.enabled
+
 `İyi başlangıç ​​değeri: false`
 
 Define haritası üretimi son derece maliyetlidir ve hedeflediği yapının oluşturulmamış bir yongağa sahip olduğu durumda sunucunuzu askıya alabilir. Bu seçeneği yalnızca dünyanızı önceden oluşturduysanız ve vanilla dünya sınırını belirlediyseniz etkinleştirmek güvenlidir.
@@ -459,38 +466,45 @@ treasure-maps.find-already-discovered
 Bu seçeneğin varsayılan değeri, yeni oluşturulan haritaların genellikle henüz oluşturulmamış yongağlarda bulunan keşfedilmemiş yapılara yönlendirmesini sağlar. Bu seçeneği true olarak ayarlarsanız, haritalar daha önce keşfedilen yapılara yönlendirebilir. Eğer bu değeri true olarak ayarlamazsanız, yeni define haritaları oluşturulurken sunucunun askıya alınması veya çökmesi gibi sorunlarla karşılaşabilirsiniz. villager-trade, köylüler tarafından satılan haritalar için, loot-tables ise define sandıkları, mağara sandıkları vb. gibi dinamik olarak ganimet oluşturan her şeyi ifade eder.
 
 tick-rates.grass-spread
+
 `İyi başlangıç ​​değeri: 4`
 
 Çimen veya mantarın yayılma hızını ayarlar. Bu, büyük alanlardaki toprağın çim veya mantara dönüşmesinin biraz daha uzun sürmesini sağlar. Bu değeri yaklaşık olarak 4 olarak ayarlarsanız, azalmış yayılma hızı farkedilir olmadan çalışabilir.
 
 tick-rates.container-update
+
 `İyi başlangıç ​​değeri: 1`
 
 Konteyner güncellemeleri arasındaki süreyi ayarlar. Bu değeri artırmak, nadiren gerçekleşse de konteyner güncellemelerinin sorunlara neden olmasına yardımcı olabilir, ancak oyuncuların envanterlerle etkileşimlerinde desenkronizasyon yaşama olasılığını artırır (hayalet öğeler).
 
 non-player-arrow-despawn-rate
+
 `İyi başlangıç ​​değeri: 20`
 
 Canavarlar tarafından atılan okların bir şeye çarptıktan sonra kaybolması gereken süreyi belirtir. Oyuncular bu okları zaten alamaz, bu nedenle bu değeri 20 gibi bir değere ayarlayabilirsiniz (1 saniye).
 
 creative-arrow-despawn-rate
+
 `İyi başlangıç ​​değeri: 20`
 
 Yaratıcı moddaki oyuncular tarafından atılan okların bir şeye çarptıktan sonra kaybolması gereken süreyi belirtir. Oyuncular bu okları zaten alamaz, bu nedenle bu değeri 20 gibi bir değere ayarlayabilirsiniz (1 saniye).
 
 [pufferfish.yml]
 disable-method-profiler
+
 `İyi başlangıç ​​değeri: true`
 
 Bu seçenek, oyundaki ek profillemeyi devre dışı bırakır. Bu profillemenin üretimde çalıştırılması gereksizdir ve ek gecikmelere neden olabilir.
 
 [purpur.yml]
 dolphin.disable-treasure-searching
+
 `İyi başlangıç ​​değeri: true`
 
 Yunusların define haritasına benzer şekilde yapı aramasını engeller.
 
 teleport-if-outside-border
+
 `İyi başlangıç ​​değeri: true`
 
 Oyuncunun dünya sınırının dışında olması durumunda onları dünya ortasına teleport etmenize olanak tanır. Vanilla dünya sınırı atlama işlemleri gerçekleştirilebilir ve bu işlemin oyuncuya verdiği hasar azaltılabilir.
@@ -498,11 +512,13 @@ Oyuncunun dünya sınırının dışında olması durumunda onları dünya ortas
 Yardımcılar
 [paper-world Yapılandırması]
 anti-xray.enabled
-İyi başlangıç ​​değeri: true
+
+`İyi başlangıç ​​değeri: true`
 
 X-raycılardan cevherleri gizlemek için bu seçeneği etkinleştirin. Bu özelliğin ayrıntılı yapılandırması için Anti-Xray'ı Yapılandırma belgesine bakın. Bu, genellikle performansı azaltır, ancak çoğu durumda performans etkisi ihmal edilebilir.
 
 nether-ceiling-void-damage-height
+
 `İyi başlangıç ​​değeri: 127`
 
 Bu seçenek 0'dan büyükse, belirtilen y seviyesinin üstündeki oyuncular sanki boşlukta gibi zarar görür. Bu oyuncuların nether tavanını kullanmalarını engeller. Vanilla nether 128 blok yüksekliğindedir, bu nedenle muhtemelen 127 olarak ayarlamalısınız. Eğer nether yüksekliğini herhangi bir şekilde değiştirirseniz, bunu [sizin_nether_yüksekliği] - 1 olarak ayarlamanız gerekebilir.
