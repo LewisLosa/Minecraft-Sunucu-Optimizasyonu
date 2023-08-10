@@ -34,9 +34,7 @@ Hala dünyayı önceden oluşturmak isterseniz, bunu yapmak için [Chunky](https
 
 Ayrıca, overworld (ana dünya), nether ve the end (son) dünyalarının ayrı dünya sınırlarının her biri için ayar yapmanız gerektiğini unutmamanız önemlidir. Nether boyutu overworld boyutunun 8 katı daha küçüktür (veri paketi ile değiştirilmediyse), bu nedenle boyutu yanlış ayarlarsanız oyuncularınız dünya sınırının dışına çıkabilir!
 
-**Vanilya dünya sınırını ayarladığınız
-
-dan emin olun (`/worldborder set [çap]`), çünkü bazı işlevlerin sınırlanmasına neden olan, gecikme nedeni olabilecek hazine haritaları için arama menzili gibi özellikleri kısıtlar.**
+**Vanilya dünya sınırını ayarladığınızdan emin olun (`/worldborder set [çap]`), çünkü bazı işlevlerin sınırlanmasına neden olan, gecikme nedeni olabilecek hazine haritaları için arama menzili gibi özellikleri kısıtlar.**
 
 # Konfigürasyonlar
 
@@ -63,56 +61,56 @@ Purpur'un alternatif keepalive sistemini etkinleştirebilirsiniz, böylece köt�
 
 ---
 
-## Chunks
+## Parçalar (Chunks)
 
 ### [server.properties]
 
 #### simulation-distance
 
-`Good starting value: 4`
+`İyi başlangıç değeri: 4`
 
-Simulation distance is distance in chunks around the player that the server will tick. Essentially the distance from the player that things will happen. This includes furnaces smelting, crops and saplings growing, etc. This is an option you want to purposefully set low, somewhere around `3` or `4`, because of the existence of `view-distance`. This allows to load more chunks without ticking them. This effectively allows players to see further without the same performance impact.
+Simülasyon mesafesi, sunucunun işleyeceği oyuncunun etrafındaki parçaların mesafesidir. Temel olarak, oyuncudan uzaklıkta nelerin gerçekleşeceği mesafesidir. Bu, işlemci yükünü azaltmak için bilinçli olarak düşük bir değer olarak ayarlamak istediğiniz bir seçenektir, yaklaşık olarak `3` veya `4` civarında bir değer, `view-distance`'ın varlığı nedeniyle. Bu, parçaları işlemlemeden daha fazla parçanın yüklenmesine olanak tanır. Bu, oyuncuların aynı performans etkisi olmadan daha uzağı görmesine olanak tanır.
 
 #### view-distance
 
-`Good starting value: 7`
+`İyi başlangıç değeri: 7`
 
-This is the distance in chunks that will be sent to players, similar to no-tick-view-distance from paper.
+Bu, oyunculara gönderilecek parçaların (chunks) mesafesidir, Paper'ın no-tick-view-distance'ına benzer.
 
-The total view distance will be equal to the greatest value between `simulation-distance` and `view-distance`. For example, if the simulation distance is set to 4, and the view distance is 12, the total distance sent to the client will be 12 chunks.
+Toplam görüntü mesafesi, `simulation-distance` ve `view-distance` arasındaki en büyük değere eşit olacaktır. Örneğin, simülasyon mesafesi 4 olarak ayarlandıysa ve görüntü mesafesi 12 ise, istemciye gönderilen toplam mesafe 12 parça olacaktır.
 
 ### [spigot.yml]
 
 #### view-distance
 
-`Good starting value: default`
+`İyi başlangıç değeri: default`
 
-This value overwrites server.properties one if not set to `default`. You should keep it default to have both simulation and view distance in one place for easier management.
+Bu değer, `default` olarak ayarlanmadıysa server.properties'yi üzerine yazar. Daha kolay yönetim için simülasyon ve görüntü mesafesini aynı yerde tutmak için varsayılanı kullanmalısınız.
 
-### [paper-world configuration]
+### [paper-world yapılandırması]
 
 #### delay-chunk-unloads-by
 
-`Good starting value: 10s`
+`İyi başlangıç değeri: 10s`
 
-This option allows you to configure how long chunks will stay loaded after a player leaves. This helps to not constantly load and unload the same chunks when a player moves back and forth. Too high values can result in way too many chunks being loaded at once. In areas that are frequently teleported to and loaded, consider keeping the area permanently loaded. This will be lighter for your server than constantly loading and unloading chunks.
+Bu seçenek, oyuncu ayrıldıktan sonra parçaların ne kadar süreyle yüklenmiş kalacağını yapılandırmanıza olanak tanır. Bir oyuncu ileri geri hareket ettiğinde aynı parçaları sürekli yükleme ve boşaltma konusunda yardımcı olur. Çok yüksek değerler çok fazla parçanın aynı anda yüklenmesine neden olabilir. Sık sık teleport edilen ve yüklenen bölgelerde, alanın sürekli yüklü kalmasını sağlamayı düşünün. Bu, oyuncuların sürekli olarak parça yükleme ve boşaltma yerine, daha hafif bir yüke neden olur.
 
 #### max-auto-save-chunks-per-tick
 
-`Good starting value: 8`
+`İyi başlangıç değeri: 8`
 
-Lets you slow down incremental world saving by spreading the task over time even more for better average performance. You might want to set this higher than `8` with more than 20-30 players. If incremental save can't finish in time then bukkit will automatically save leftover chunks at once and begin the process again.
+Daha iyi ortalama performans için artık artık dünyayı yavaşça kaydetmeye yayarak inkremental dünya kaydetmeyi yavaşlatmanızı sağlar. 20-30 oyuncudan fazlasıyla daha yüksek bir değer ayarlamak isteyebilirsiniz. İnkremental kaydetme belirli bir sürede tamamlanamazsa, bu atıkları otomatik olarak kaydeder ve işlemi yeniden başlatır.
 
 #### prevent-moving-into-unloaded-chunks
 
-`Good starting value: true`
+`İyi başlangıç değeri: true`
 
-When enabled, prevents players from moving into unloaded chunks and causing sync loads that bog down the main thread causing lag. The probability of a player stumbling into an unloaded chunk is higher the lower your view-distance is.
+Etkinleştirildiğinde, oyuncuların yüklenmemiş parçalara geçmesini ve ana iş parçacığını yavaşlatan senkron yüklemeleri neden olmasını engeller. Görüntü mesafeniz ne kadar düşükse, bir oyuncunun yüklenmemiş bir parçaya rasgele düşme olasılığı o kadar yüksektir.
 
 #### entity-per-chunk-save-limit
 
 ```
-Good starting values:
+İyi başlangıç değerleri:
 
     area_effect_cloud: 8
     arrow: 16
@@ -134,26 +132,26 @@ Good starting values:
     wither_skull: 4
 ```
 
-With the help of this entry you can set limits to how many entities of specified type can be saved. You should provide a limit for each projectile at least to avoid issues with massive amounts of projectiles being saved and your server crashing on loading that. You can put any entity id here, see the minecraft wiki to find IDs of entities. Please adjust the limit to your liking. Suggested value for all projectiles is around `10`. You can also add other entities by their type names to that list. This config option is not designed to prevent players from making large mob farms.
+Bu girişin yardımıyla belirtilen türdeki varlıkların kaçının kaydedilebileceğini sınırlandırabilirsiniz. Herhangi bir ölçekteki projektileri sınırlamak için en az bir sınır belirtmelisiniz, aksi takdirde çok sayıda projektilin kaydedilmesi ve sunucunuzun yüklenirken çökmesi sorunları ortaya çıkabilir. Burada herhangi bir varlık kimliği (ID) girebilirsiniz, varlık kimliklerini bulmak için Minecraft wiki'ye bakabilirsiniz. Lütfen sınırı isteğinize göre ayarlayın. Tüm projektiler için önerilen değer yaklaşık olarak `10`'dur. Ayrıca, bu listeye tür adlarını ekleyerek diğer varlıkları da ekleyebilirsiniz. Bu yapılandırma seçeneği, oyuncuların büyük canavar çiftlikleri oluşturmalarını engellemek için tasarlanmamıştır.
 
 ### [pufferfish.yml]
 
 #### max-loads-per-projectile
 
-`Good starting value: 8`
+`İyi başlangıç değeri: 8`
 
-Specifies the maximum amount of chunks a projectile can load in its lifetime. Decreasing will reduce chunk loads caused by entity projectiles, but could cause issues with tridents, enderpearls, etc.
+Bir projektilin ömrü boyunca yükleyebileceği maksimum parça sayısını belirtir. Daha düşük bir değere ayarlamak, varlık projektileri nedeniyle yüklenen parça yükünü azaltır, ancak tridentler, ender incileri vb. ile sorunlara neden olabilir.
 
 ---
 
-## Mobs
+## Yaratıklar (Mobs)
 
 ### [bukkit.yml]
 
 #### spawn-limits
 
 ```
-Good starting values:
+İyi başlangıç değerleri:
 
     monsters: 20
     animals: 5
@@ -164,12 +162,12 @@ Good starting values:
     ambient: 1
 ```
 
-The math of limiting mobs is `[playercount] * [limit]`, where "playercount" is current amount of players on the server. Logically, the smaller the numbers are, the less mobs you're gonna see. `per-player-mob-spawn` applies an additional limit to this, ensuring mobs are equally distributed between players. Reducing this is a double-edged sword; yes, your server has less work to do, but in some gamemodes natural-spawning mobs are a big part of a gameplay. You can go as low as 20 or less if you adjust `mob-spawn-range` properly. Setting `mob-spawn-range` lower will make it feel as if there are more mobs around each player. If you are using Paper, you can set mob limits per world in [paper-world configuration].
+Yaratıkları sınırlamanın matematiği `[oyuncusayısı] * [limit]`, burada "oyuncusayısı" sunucudaki mevcut oyuncu sayısıdır. Mantıksal olarak, sayılar ne kadar küçükse, göreceğiniz yaratıklar o kadar az olur. `per-player-mob-spawn` bunun üzerine ek bir sınırlama getirir ve yaratıkların oyuncular arasında eşit şekilde dağıtılmasını sağlar. Bu, iş yükünüzün daha düşük olması anlamına gelir, ancak bazı oyun modları için doğal yolla oluşan yaratıklar oyunun büyük bir bölümünü oluşturur. Mob sınırlarını ayarlamak için `20` veya daha düşük bir değere gidebilirsiniz, eğer `mob-spawn-range`'i uygun şekilde ayarlarsanız. `mob-spawn-range` değerini düşürmek, her oyuncu etrafında daha fazla yaratık olduğu hissini verir. Paper kullanıyorsanız, [paper-world yapılandırması] ile dünya başına mob sınırları belirleyebilirsiniz.
 
 #### ticks-per
 
 ```
-Good starting values:
+İyi başlangıç değerleri:
 
     monster-spawns: 10
     animal-spawns: 400
@@ -180,8 +178,7 @@ Good starting values:
     ambient-spawns: 400
 ```
 
-This option sets how often (in ticks) the server attempts to spawn certain living entities. Water/ambient mobs do not need to spawn each tick as they don't usually get killed that quickly. As for monsters: Slightly increasing the time between spawns should not impact spawn rates even in mob farms. In most cases all of the values under this option should be higher than `1`. Setting this higher also allows your server to better cope with areas where mob spawning is disabled.
-
+Bu seçenek, belirli canlı varlıkların ne sıklıkla (tick cinsinden) doğmaya çalışılacağını belirler. Su/çevresel varlıklar genellikle çok hızlı öldürülmediği için her tick'te doğmaları gerekmez. Canavarlar için: Doğmalar arasındaki süreyi hafifçe artırmak, hatta canavar çiftliklerinde bile doğum oranlarını etkilememelidir. Bu seçenek altındaki tüm değerlerin genellikle `1` değerinden yüksek olması gerekmektedir. Bu değeri yükseltmek aynı zamanda, yaratık doğmasının devre dışı bırakıldığı bölgelerle daha iyi başa çıkmanıza olanak sağlar.
 ### [spigot.yml]
 
 #### mob-spawn-range
