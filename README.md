@@ -1,62 +1,64 @@
-# Minecraft server optimization guide
+# Minecraft Sunucu Optimizasyon Rehberi
 
-Note for users that are on vanilla, Fabric or Spigot (or anything below Paper) - go to your server.properties and change `sync-chunk-writes` to `false`. This option is forcibly set to false on Paper and its forks, but on other server implementations you need to switch this to false manually. This allows the server to save chunks off the main thread, lessening the load on the main tick loop.
+Not: Vanilla, Fabric veya Spigot (veya Paper'ın altında olan diğer sürümler) kullanan kullanıcılar - server.properties dosyanıza gidin ve `sync-chunk-writes` değerini `false` olarak değiştirin. Bu seçenek Paper ve türevlerinde zorunlu olarak `false` olarak ayarlanmıştır, ancak diğer sunucu uygulamalarında bunu manuel olarak `false` olarak değiştirmeniz gerekmektedir. Bu seçenek, sunucunun parçaları ana iş parçacığı dışında kaydetmesine izin verir ve bu da ana tik döngüsündeki yükü azaltır.
 
-Guide for version 1.20. Some things may still apply to 1.15 - 1.19.
+Versiyon 1.20 için rehber. Bazı şeyler hala 1.15 - 1.19'a uygulanabilir.
 
-Based on [this guide](https://www.spigotmc.org/threads/guide-server-optimization%E2%9A%A1.283181/) and other sources (all of them are linked throughout the guide when relevant).
+Bu rehber, [bu rehber](https://www.spigotmc.org/threads/guide-server-optimization%E2%9A%A1.283181/) ve diğer kaynaklara dayanmaktadır (ilgili olduğunda rehber boyunca bağlantılar verilmiştir).
 
-Use the table of contents located above (next to `README.md`) to easily navigate throughout this guide.
+Bu rehberde gezinmeyi kolaylaştırmak için yukarıdaki tabloyu (README.md yanındaki) kullanarak içerik listesini kullanabilirsiniz.
 
-# Intro
-There will never be a guide that will give you perfect results. Each server has their own needs and limits on how much you can or are willing to sacrifice. Tinkering around with the options to fine tune them to your servers needs is what it's all about. This guide only aims to help you understand what options have impact on performance and what exactly they change. If you think you found inaccurate information within this guide, you're free to open an issue or set up a pull request to correct it.
+# Giriş
+Mükemmel sonuçlar sunan bir rehber asla olmayacaktır. Her sunucunun kendi ihtiyaçları ve ne kadar ödün verilebileceği sınırları vardır. Seçeneklerle oynamak ve onları sunucunuzun ihtiyaçlarına göre ayarlamak, işin temelidir. Bu rehber, yalnızca performans üzerinde etkisi olan seçenekleri ve tam olarak neyi değiştirdiklerini anlamanıza yardımcı olmayı amaçlamaktadır. Bu rehberde yanlış bilgi bulduğunuzu düşünüyorsanız, düzeltmek için bir sorun açabilir veya bir çekme isteği yapabilirsiniz.
 
-# Preparations
+# Hazırlıklar
 
-## Server JAR
-Your choice of server software can make a huge difference in performance and API possibilities. There are currently multiple viable popular server JARs, but there are also a few that you should stay away from for various reasons.
+## Sunucu JAR
+Sunucu yazılımınızın seçimi, performans ve API olasılıkları açısından büyük bir fark yaratabilir. Şu anda birden fazla popüler sunucu JAR'ı bulunmaktadır, ancak çeşitli nedenlerle kaçınılması gerekenler de mevcuttur.
 
-Recommended top picks:
-* [Paper](https://github.com/PaperMC/Paper) - The most popular server software that aims to improve performance while fixing gameplay and mechanics inconsistencies.
-* [Pufferfish](https://github.com/pufferfish-gg/Pufferfish) - Paper fork that aims to further improve server performance.
-* [Purpur](https://github.com/PurpurMC/Purpur) - Pufferfish fork focused on features and the freedom of customization.
+Tavsiye edilen en iyi seçenekler:
+* [Paper](https://github.com/PaperMC/Paper) - Oynanış ve mekanik tutarsızlıklarını düzeltmeyi amaçlayan en popüler sunucu yazılımıdır.
+* [Pufferfish](https://github.com/pufferfish-gg/Pufferfish) - Sunucu performansını daha da iyileştirmeyi amaçlayan Paper türevidir.
+* [Purpur](https://github.com/PurpurMC/Purpur) - Özelliklere ve özelleştirmeye özgürlüğe odaklanan Pufferfish türevidir.
 
-You should stay away from:
-* Any paid server JAR that claims async anything - 99.99% chance of being a scam.
-* Bukkit/CraftBukkit/Spigot - Extremely outdated in terms of performance compared to other server software you have access to.
-* Any plugin/software that enables/disables/reloads plugins on runtime. See [this section](#plugins-enablingdisabling-other-plugins) to understand why.
-* Many forks further downstream from Pufferfish or Purpur will encounter instability and other issues. If you're seeking more performance gains, optimize your server or invest in a personal private fork.
+Kaçınılması gerekenler:
+* Herhangi bir ödeme yapmanız gereken async iddiasında bulunan sunucu JAR'ı - %99.99 dolandırıcılık olasılığı vardır.
+* Bukkit/CraftBukkit/Spigot - Diğer sunucu yazılımlarına göre performans açısından son derece eski kalmıştır.
+* Herhangi bir eklentiyi/programı çalışma zamanında etkinleştiren/devre dışı bırakan/yeniden yükleyen yazılım. Nedenini anlamak için [bu bölüme](#plugins-enablingdisabling-other-plugins) bakabilirsiniz.
+* Pufferfish veya Purpur'dan daha aşağıda olan birçok dalga, kararsızlık ve diğer sorunlarla karşılaşabilir. Daha fazla performans kazanmaya çalışıyorsanız, sunucunuzu optimize edin veya kişisel bir özel dalga oluşturmak için yatırım yapın.
 
-## Map pregen
-Map pregeneration, thanks to various optimizations to chunk generation added over the years is now only useful on servers with terrible, single threaded, or limited CPUs. Though, pregeneration is commonly used to generate chunks for world-map plugins such as Pl3xMap or Dynmap.
+## Harita Önceden Oluşturma (Map Pregen)
+Yıllar içinde parça üretimine eklenen çeşitli optimizasyonlar sayesinde, harita önceden oluşturma artık yalnızca korkunç, tek iş parçacıklı veya sınırlı CPU'ya sahip sunucularda faydalıdır. Ancak, pregenerasyon genellikle Pl3xMap veya Dynmap gibi dünya haritası eklentileri için parçaların oluşturulmasını sağlamak için kullanılır.
 
-If you still want to pregen the world, you can use a plugin such as [Chunky](https://github.com/pop4959/Chunky) to do it. Make sure to set up a world border so your players don't generate new chunks! Note that pregenning can sometimes take hours depending on the radius you set in the pregen plugin. Keep in mind that with Paper and above your tps will not be affected by chunk loading, but the speed of loading chunks can significantly slow down when your server's cpu is overloaded.
+Hala dünyayı önceden oluşturmak isterseniz, bunu yapmak için [Chunky](https://github.com/pop4959/Chunky) gibi bir eklenti kullanabilirsiniz. Oyuncularınızın yeni parçalar oluşturmaması için bir dünya sınırı ayarladığınızdan emin olun! Unutmayın ki pregenerasyon bazen, pregen eklentisinde belirlediğiniz yarıçapa bağlı olarak saatler sürebilir. Paper ve üstü sürümlerle tps'niz parça yüklemesinden etkilenmeyecektir, ancak sunucunuzun işlemcisi aşırı yüklendiğinde parçaların yüklenme hızı önemli ölçüde yavaşlayabilir.
 
-It's key to remember that the overworld, nether and the end have separate world borders that need to be set up for each world. The nether dimension is 8x smaller than the overworld (if not modified with a datapack), so if you set the size wrong your players might end up outside of the world border!
+Ayrıca, overworld (ana dünya), nether ve the end (son) dünyalarının ayrı dünya sınırlarının her biri için ayar yapmanız gerektiğini unutmamanız önemlidir. Nether boyutu overworld boyutunun 8 katı daha küçüktür (veri paketi ile değiştirilmediyse), bu nedenle boyutu yanlış ayarlarsanız oyuncularınız dünya sınırının dışına çıkabilir!
 
-**Make sure to set up a vanilla world border (`/worldborder set [diameter]`), as it limits certain functionalities such as lookup range for treasure maps that can cause lag spikes.**
+**Vanilya dünya sınırını ayarladığınız
 
-# Configurations
+dan emin olun (`/worldborder set [çap]`), çünkü bazı işlevlerin sınırlanmasına neden olan, gecikme nedeni olabilecek hazine haritaları için arama menzili gibi özellikleri kısıtlar.**
 
-## Networking
+# Konfigürasyonlar
+
+## Ağ Ayarları
 
 ### [server.properties]
 
 #### network-compression-threshold
 
-`Good starting value: 256`
+`İyi başlangıç değeri: 256`
 
-This allows you to set the cap for the size of a packet before the server attempts to compress it. Setting it higher can save some CPU resources at the cost of bandwidth, and setting it to -1 disables it. Setting this higher may also hurt clients with slower network connections. If your server is in a network with a proxy or on the same machine (with less than 2 ms ping), disabling this (-1) will be beneficial, since internal network speeds can usually handle the additional uncompressed traffic.
+Bu, sunucunun sıkıştırmayı denemeden önce bir paketin boyutunun üst sınırını belirlemenizi sağlar. Daha yüksek bir değer ayarlamak, bant genişliğini tasarruf edebilirken CPU kaynaklarını kurtarabilir, ancak -1 ayarlamak bunu devre dışı bırakır. Bunun daha yüksek ayarlanması, daha yavaş ağ bağlantılarına sahip istemcileri etkileyebilir. Sunucunuz bir proxy ağında veya aynı makinede (2 ms'den düşük gecikme ile) ise, bunu devre dışı bırakmak (-1) yararlı olacaktır, çünkü dahili ağ hızları genellikle ek sıkıştırılmamış trafiği işleyebilir.
 
 ### [purpur.yml]
 
 #### use-alternate-keepalive
 
-`Good starting value: true`
+`İyi başlangıç değeri: true`
 
-You can enable Purpur's alternate keepalive system so players with bad connection don't get timed out as often. Has known incompatibility with TCPShield.
+Purpur'un alternatif keepalive sistemini etkinleştirebilirsiniz, böylece kötü bağlantıya sahip oyuncular daha az sıklıkla zaman aşımına uğrarlar. TCPShield ile bilinen uyumsuzluğa sahiptir.
 
-> Enabling this sends a keepalive packet once per second to a player, and only kicks for timeout if none of them were responded to in 30 seconds. Responding to any of them in any order will keep the player connected. AKA, it won't kick your players because 1 packet gets dropped somewhere along the lines  
+> Bu, bir oyuncuya saniyede bir kez bir keepalive paketi gönderir ve sadece 30 saniye boyunca hiçbiri yanıtlanmazsa zaman aşımına uğrar. Onlardan herhangi birine herhangi bir sırayla yanıt vermek, oyuncunun bağlantısının devam etmesini sağlar. Yani, bir paket düşerse oyuncularınızı atmaz  
 ~ https://purpurmc.org/docs/Configuration/#use-alternate-keepalive
 
 ---
