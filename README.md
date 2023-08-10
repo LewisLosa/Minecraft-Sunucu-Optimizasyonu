@@ -521,36 +521,40 @@ nether-ceiling-void-damage-height
 
 `İyi başlangıç ​​değeri: 127`
 
-Bu seçenek 0'dan büyükse, belirtilen y seviyesinin üstündeki oyuncular sanki boşlukta gibi zarar görür. Bu oyuncuların nether tavanını kullanmalarını engeller. Vanilla nether 128 blok yüksekliğindedir, bu nedenle muhtemelen 127 olarak ayarlamalısınız. Eğer nether yüksekliğini herhangi bir şekilde değiştirirseniz, bunu [sizin_nether_yüksekliği] - 1 olarak ayarlamanız gerekebilir.
+---
 
-Java başlatma bayrakları
-Vanilla Minecraft ve Minecraft sunucu yazılımı 1.19 sürümünde Java 17 veya daha yükseğini gerektirir. Oracle lisansını değiştirdi ve artık java'yı onlardan almak için ikna edici bir neden yok. Tavsiye edilen tedarikçiler Adoptium ve Amazon Corretto. OpenJ9 veya GraalVM gibi alternatif JVM uygulamaları çalışabilir, ancak Paper tarafından desteklenmez ve sorunlara neden olma olasılıkları olduğundan şu anda önerilmez.
+# Java Başlatma Bayrakları
+[Vanilla Minecraft ve Minecraft sunucu yazılımı 1.19 sürümünde Java 17 veya daha yükseğini gerektirir](https://docs.papermc.io/java-install-update). Oracle lisansını değiştirdi ve artık onlardan java almak için ikna edici bir neden bulunmuyor. Tavsiye edilen sağlayıcılar [Adoptium](https://adoptium.net/) ve [Amazon Corretto](https://aws.amazon.com/corretto/) dur. OpenJ9 veya GraalVM gibi alternatif JVM uygulamaları çalışabilir, ancak Paper tarafından desteklenmez ve sorunlara neden olma olasılıkları vardır, bu nedenle şu anda önerilmez.
 
-Çöp toplayıcınız, büyük çöp toplayıcı görevlerinden kaynaklanan gecikme sıkıntılarını azaltmak için yapılandırılabilir. Minecraft sunucuları için optimize edilmiş başlatma bayraklarını burada bulabilirsiniz. Bununla birlikte, bu öneri alternatif JVM uygulamalarında çalışmayabilir. Doğru başlatma bayraklarını almak için flags.sh başlatma bayrakları oluşturucu aracını kullanmanız önerilir.
+Büyük çöp toplayıcı görevlerinden kaynaklanan gecikmeleri azaltmak için çöp toplayıcınızı yapılandırabilirsiniz. Minecraft sunucuları için optimize edilmiş başlatma bayraklarını [burada](https://docs.papermc.io/paper/aikars-flags) bulabilirsiniz. Unutmayın ki bu öneri alternatif JVM uygulamalarında çalışmayabilir. Sunucunuz için doğru başlatma bayraklarını elde etmek için [flags.sh](https://flags.sh) başlatma bayrakları oluşturucusunu kullanmanız önerilir.
 
-Ayrıca, başlatma bayrağındaki -jar öncesine beta bayrağı --add-modules=jdk.incubator.vector eklemek, performansı artırabilir. Bu bayrak, Pufferfish'in CPU'nuzdaki SIMD talimatlarını kullanmasını sağlar, böylece bazı matematiksel işlemleri daha hızlı yapabilir. Şu anda yalnızca oyun içi eklenti haritalarının (örneğin imageonmaps gibi) renderini oluşturmak için kullanılır ve bu sayede olası 8 kat daha hızlı hale getirilir.
+Ayrıca, başlatma bayraklarınızda `-jar`'dan önce beta bayrağı `--add-modules=jdk.incubator.vector` eklemek, performansı artırabilir. Bu bayrak, Pufferfish'in CPU'nuzdaki SIMD talimatlarını kullanmasını sağlar, bu da bazı matematiksel işlemleri daha hızlı hale getirebilir. Şu anda, bu sadece oyun içi eklenti haritalarının (örneğin imageonmaps gibi) renderini oluşturmak için kullanılır ve bu sayede olası olarak 8 kat daha hızlı olabilir.
 
-"Gerçek olamayacak kadar iyi" eklentiler
-Yerdeki öğeleri kaldıran eklentiler
-Kesinlikle gereksizdirler çünkü merge-radius ve alt-item-despawn-rate ile yerine konulabilirler ve temel sunucu yapılandırmalarından daha az yapılandırılabilirler. Genellikle öğeleri tarayan ve kaldıran eklentiler, öğeleri kaldırmamaktan daha fazla kaynak kullanır.
+# "Gerçek Olamayacak Kadar İyi" Eklentiler
 
-Canavar yığınlayıcı eklentiler
-Kullanmaları gerçekten zordur. Doğal olarak üretilmiş varlıkları yığınlamak, sürekli olarak daha fazla canavar üretmeye çalışan sunucunun daha fazla gecikme yaşamasına neden olur. Tek kabul edilebilir kullanım durumu, büyük miktarda üreticiye sahip sunucularda üretilen canavar yığınlarıdır.
+## Yerdeki Öğeleri Kaldıran Eklentiler
+Kesinlikle gereksizdir, çünkü [merge-radius](#merge-radius) ve [alt-item-despawn-rate](#alt-item-despawn-rate) ile değiştirilebilirler ve açıkçası temel sunucu yapılandırmalarından daha az yapılandırılabilirler. Bu tür eklentiler, öğeleri tarayarak ve kaldırarak daha fazla kaynak kullanma eğilimindedir ve öğeleri hiç kaldırmamaktan daha fazla kaynak kullanır.
 
-Diğer eklentileri etkinleştiren/devre dışı bırakan eklentiler
-Eklentileri etkinleştiren veya devre dışı bırakan herhangi bir şey son derece tehlikelidir. Bu şekilde bir eklenti yüklemek, izleme verileriyle ilgili ölümcül hatalara neden olabilir ve bir eklentiyi devre dışı bırakmak, bağımlılıkları kaldırdığı için hatalara neden olabilir. /reload komutu da tam olarak aynı sorunlara neden olur ve bu sorunlar hakkında daha fazla bilgi için me4502'nin blog gönderisini okuyabilirsiniz.
+## Canavar Yığınlayıcı Eklentiler
+Birini kullanmayı haklı çıkarmak gerçekten zordur. Doğal olarak üretilmiş varlıkları yığınlamak, hiç yığınlamamaktan daha fazla gecikmeye neden olur, çünkü sunucu sürekli olarak daha fazla canavar üretmeye çalışır. Tek "kabul edilebilir" kullanım durumu, büyük miktarda canavar üreten sunuculardaki yaratıcılar için kullanılabilir.
 
-Neden gecikiyor? - performans ölçümü
-mspt
-Paper, son zamanlarda işlenen tikleri hesaplamak için kullanılan zamanı size söyleyen /mspt komutunu sunar. İlk ve ikinci değer 50'nin altındaysa, tebrikler! Sunucunuz gecikmiyor demektir! Üçüncü değer 50'nin üzerindeyse, en az bir tikin daha uzun sürdüğü anlamına gelir. Bu tamamen normaldir ve zaman zaman meydana gelir, endişelenmeyin.
+## Eklentileri Etkinleştirme/Devre Dışı Bırakan Eklentiler
+Çalışma zamanında eklentileri etkinleştiren veya devre dışı bırakan herhangi bir şey son derece tehlikelidir. Böyle bir eklenti yüklemek, izleme verileriyle ölümcül hatalara neden olabilir ve bir eklentiyi devre dışı bırakmak, bağımlılıkları kaldırdığı için hatalara neden olabilir. `/reload` komutu tam olarak aynı sorunlara neden olur ve bu sorunlar hakkında daha fazla bilgiyi [me4502'nin blog gönderisinde](https://madelinemiller.dev/blog/problem-with-reload/) okuyabilirsiniz.
 
-Spark
-Spark, sunucunuzun CPU ve bellek kullanımını profillemenizi sağlayan bir eklentidir. Nasıl kullanılacağı hakkında bilgi almak için wiki sayfasına bakabilirsiniz. Ayrıca, gecikme artışının nedenini bulmaya yardımcı olacak bir kılavuz da burada bulunmaktadır.
+# Neden Gecikme Var? - Performansı Ölçme
 
-Timings
-Sunucunuz geciktiğinde neyin olabileceğini görmek için Timings kullanılabilir. Timings, en uzun süren görevleri tam olarak gösteren bir araçtır. Bu, en temel sorun giderme aracıdır ve gecikme hakkında yardım isterseniz muhtemelen Timings'e ihtiyacınız olacaktır. Timings'in sunucular üzerinde ciddi bir performans etkisi vardır, bu nedenle Spark eklentisini Timings yerine kullanmanız ve Timings'i tamamen devre dışı bırakmak için Purpur veya Pufferfish kullanmanız önerilir.
+## mspt
+Paper, son zamanlarda işlenen tikleri hesaplamak için kullanılan süreyi gösteren `/mspt` komutunu sunar. İlk ve ikinci değerler 50'nin altındaysa, tebrikler! Sunucunuzda gecikme yok demektir! Üçüncü değer 50'nin üzerindeyse, en az bir tikin daha uzun sürdüğü anlamına gelir. Bu tamamen normaldir ve zaman zaman olur, bu nedenle panik yapmayın.
 
-Sunucunuzun Timings'ini almak için sadece /timings paste komutunu çalıştırmanız ve size sağlanan bağlantıya tıklamanız gerekir. Bu bağlantıyı başkalarıyla paylaşarak size yardımcı olmalarını sağlayabilirsiniz. Ayrıca, ne yaptığınızı bilmiyorsanız yanlış okuma ihtimali vardır. Timings'i nasıl okuyacağınıza dair detaylı bir Aikar'ın video öğreticisi bulunmaktadır.
+## Spark
+[Spark](https://spark.lucko.me/), sunucunuzun CPU ve bellek kullanımını profillemenize olanak tanıyan bir eklentidir. Nasıl kullanılacağı hakkında bilgi almak için [wiki sayfasına](https://spark.lucko.me/docs/) bakabilirsiniz. Ayrıca, gecikme artışının nedenini bulmaya yardımcı olacak bir rehber de [burada](https://spark.lucko.me/docs/guides/Finding-lag-spikes) bulunmaktadır.
+
+## Timings
+Sunucunuz gecikmeye neden olabilecek şeyleri görmek için Timings'i kullanabilirsiniz. Timings, hangi görevlerin en uzun sürede tamamlandığını tam olarak görmenizi sağlayan bir araçtır. Bu, en temel sorun giderme aracıdır ve gecikme konusunda yardım istediğinizde muhtemelen Timings istenecektir. Timings, sunucularda ciddi bir performans etkisi olduğu için Timings yerine Spark eklentisini kullanmanız ve Timings'i tamamen devre dışı bırakmak için Purpur veya Pufferfish kullanmanız önerilir.
+
+Sunucunuzun Timings'ini almak için sadece `/timings paste` komutunu çalıştırmanız ve size sağlanan bağlantıya tıklamanız yeterlidir. Bu bağlantıyı başkalarıyla paylaşarak size yardımcı olmalarını sağlayabilirsiniz. Eğer ne yaptığınızı bilmiy
+
+orsanız yanlış okuma olasılığı vardır. Timings'leri nasıl okuyacağınıza dair detaylı bir [Aikar'ın video rehberi](https://www.youtube.com/watch?v=T4J0A9l7bfQ) bulunmaktadır.
 
 [`SOG`]: https://www.spigotmc.org/threads/guide-server-optimization%E2%9A%A1.283181/
 [server.properties]: https://minecraft.fandom.com/wiki/Server.properties
