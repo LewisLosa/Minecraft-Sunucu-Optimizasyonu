@@ -552,9 +552,7 @@ Paper, son zamanlarda işlenen tikleri hesaplamak için kullanılan süreyi gös
 ## Timings
 Sunucunuz gecikmeye neden olabilecek şeyleri görmek için Timings'i kullanabilirsiniz. Timings, hangi görevlerin en uzun sürede tamamlandığını tam olarak görmenizi sağlayan bir araçtır. Bu, en temel sorun giderme aracıdır ve gecikme konusunda yardım istediğinizde muhtemelen Timings istenecektir. Timings, sunucularda ciddi bir performans etkisi olduğu için Timings yerine Spark eklentisini kullanmanız ve Timings'i tamamen devre dışı bırakmak için Purpur veya Pufferfish kullanmanız önerilir.
 
-Sunucunuzun Timings'ini almak için sadece `/timings paste` komutunu çalıştırmanız ve size sağlanan bağlantıya tıklamanız yeterlidir. Bu bağlantıyı başkalarıyla paylaşarak size yardımcı olmalarını sağlayabilirsiniz. Eğer ne yaptığınızı bilmiy
-
-orsanız yanlış okuma olasılığı vardır. Timings'leri nasıl okuyacağınıza dair detaylı bir [Aikar'ın video rehberi](https://www.youtube.com/watch?v=T4J0A9l7bfQ) bulunmaktadır.
+Sunucunuzun Timings'ini almak için sadece `/timings paste` komutunu çalıştırmanız ve size sağlanan bağlantıya tıklamanız yeterlidir. Bu bağlantıyı başkalarıyla paylaşarak size yardımcı olmalarını sağlayabilirsiniz. Eğer ne yaptığınızı bilmiyorsanız yanlış okuma olasılığı vardır. Timings'leri nasıl okuyacağınıza dair detaylı bir [Aikar'ın video rehberi](https://www.youtube.com/watch?v=T4J0A9l7bfQ) bulunmaktadır.
 
 [`SOG`]: https://www.spigotmc.org/threads/guide-server-optimization%E2%9A%A1.283181/
 [server.properties]: https://minecraft.fandom.com/wiki/Server.properties
