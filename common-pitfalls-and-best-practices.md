@@ -1,23 +1,25 @@
-# Common pitfalls and best practices
+# Yaygın Tuzağa Düşmemek İçin En İyi Uygulamalar
 
-This article aims to explain common pitfalls that server owners face.
+Bu makale, sunucu sahiplerinin karşılaştığı yaygın tuzağa düşmelere açıklık getirmeyi amaçlamaktadır.
 
-## Always backup
-There are two types of people - those who make backups, and those who will start making backups. It's just a matter of time when you experience data loss. Always make copies to avoid losing your worlds or plugin data. You can apply this to any computer related workflow, not just minecraft.
+## Her Zaman Yedek Alın
+İki tür insan vardır - yedek alanlar ve yedek almaya başlayacak olanlar. Veri kaybı yaşamanızın sadece bir zaman meselesi olduğunu unutmayın. Dünyalarınızı veya eklenti verilerinizi kaybetmemek için her zaman kopyalarını alın. Bu sadece Minecraft değil, herhangi bir bilgisayarla ilgili iş akışına uygulayabileceğiniz bir ilkedir.
 
-## Don't use outdated software
-By running outdated software versions you risk players abusing unpatched exploits, including item duplication (infinite items). It also adds an inconvenience factor since your players have to specifically downgrade their client version to match your server. This can be circumvented by using a protocol hack, but it's not ideal.
+## Güncel Olmayan Yazılım Kullanmayın
+Güncel olmayan yazılım sürümlerini çalıştırarak, oyuncuların yama alınmamış açıkları istismar etme riski altında olursunuz; buna madde çoğaltma (sonsuz madde) dahildir. Ayrıca oyuncularınızın sunucunuzla eşleşmesi için özellikle istemci sürümünü düşürmeleri gerekeceğinden, bu bir rahatsızlık faktörü de ekler. Bu, bir protokol hilesi kullanılarak atlatılabilir, ancak ideal bir çözüm değildir.
 
-## Don't run Bukkit/Spigot anymore
-Bukkit and Spigot are basically in maintenance mode. They update anytime there's a new version and if a critical exploit is found, but don't add any performance updates. This means any performance issues you may experience on those softwares will never be improved over time. To avoid that, upgrade to [Paper](https://papermc.io/downloads) or [Purpur](https://purpurmc.org/downloads). Bukkit/Spigot plugins will work just as well (maybe even better) with the server software listed. If they don't, then it's safe to assume that the plugin dev is either doing things that they shouldn't or did a negligent job creating their plugin. They also add optimization patches like a chunk loading system that can take advantage of multiple cpu threads or a setting that allows the server to tick less chunks than it actually sends to the player. See the [main optimization guide](https://github.com/YouHaveTrouble/minecraft-optimization) for more details.
+## Artık Bukkit/Spigot Kullanmayın
+Bukkit ve Spigot temel olarak bakım modundadır. Yeni bir sürüm geldiğinde ve kritik bir açık bulunduğunda güncellenirler, ancak performans güncellemeleri eklenmez. Bu, bu yazılımlarda yaşayabileceğiniz herhangi bir performans sorununun zaman içinde geliştirilmeyeceği anlamına gelir. Bu sorunları önlemek için [Paper](https://papermc.io/downloads) veya [Purpur](https://purpurmc.org/downloads) gibi alternatiflere geçiş yapın. Bukkit/Spigot eklentileri, listelenen sunucu yazılımlarıyla aynı şekilde çalışacaktır (belki de daha iyi). Eğer çalışmazlarsa, eklenti geliştiricisinin ya yapmaması gereken şeyleri yaptığını ya da eklentisini oluştururken ihmalkar davrandığını varsaymak güvenlidir. Ayrıca, birden fazla işlemci çekirdeğinden faydalanabilen bir yükleme sistemi gibi iyileştirme yama eklerler veya sunucunun oyuncuya gönderdiğinden daha az yığın attığı bir ayar gibi optimizasyon yamaları eklerler. Daha fazla ayrıntı için [ana optimizasyon rehberine](https://github.com/YouHaveTrouble/minecraft-optimization) bakın.
 
-## Avoid shared hosting if possible
-Shared hosts are usually the cheapest option, and that's for a valid reason. They offer you 2 types of resources - guaranteed and shared. Guaranteed resources are usually laughably low and may not be enough to run a server for a few players. Shared resources on the other hand are usually enough to run a server with decent performance. There is a catch, though; shared resources, like the name implies, are shared between your server and other servers on the same physical machine. Your server can only benefit from having them when no other server uses them. The situation where your server fully utilises shared resources is pretty much impossible to happen, as most shared hosts oversell their resources. Like airplane tickets, the hosting site sells more resources than they have available in hopes that not all of them will be used. This often leads to situations where all servers are bogged down because there aren't enough resources to spare.
+## Mümkünse Paylaşımlı Barındırmadan Kaçının
+Paylaşımlı barındırmalar genellikle en ucuz seçenektir ve bunun geçerli bir nedeni vardır. Size iki tür kaynak sunarlar - garanti edilen ve paylaşılan kaynaklar. Garanti edilen kaynaklar genellikle güldürecek kadar düşüktür ve birkaç oyuncu için sunucu çalıştırmak için yeterli olmayabilir. Öte yandan paylaşılan kaynaklar genellikle makul performansla sunucu çalıştırmak için yeterlidir. Ancak bir tuzağı vardır; paylaşılan kaynaklar, adından da anlaşılacağı gibi, fiziksel olarak aynı makinedeki diğer sunucularla paylaşılır. Sunucunuz bu kaynaklardan yararlanabilir, ancak başka bir sunucu bunları kullanmadığında. Paylaşılan kaynakların tamamen kullanıldığı durum oldukça nadirdir, çünkü çoğu paylaşımlı barındırma sağlayıcısı kaynaklarını aşırı satar. Uçak bileti gibi, barındırma sitesi kullanılabilir kaynaklardan daha fazlasını satar, umut eder ki hepsi kullanılmayacaktır. Bu genellikle tüm sunucuların kaynakların yetersiz olduğu için yavaşladığı durumlara yol açar.
 
-## Avoid datapacks that use command functions
-Datapacks that run commands are extremely laggy. It may not be much with a few players on, but that doesn't scale well with the playercount and will lag your server pretty quickly as you gain players. Datapacks that modify biomes, loot tables, etc are fine. You're better off looking for a plugin alternative.
+## Komut fonksiyonları kullanan veri paketlerinden kaçının
+Komut çalıştıran veri paketleri son derece yavaştır. Birkaç oyuncuyla pek fazla olmayabilir, ancak bu oyuncu sayısıyla ölçeklendirilemez ve oyuncu sayınız arttıkça sunucunuzu hızlı bir şekilde yavaşlatabilir. Biyomları, yağma tablolarını değiştiren veri paketleri iyidir. Bir eklenti alternatifi aramak daha iyi bir seçenektir.
 
-## Choosing hardware
-Don't just go off of how much RAM you need. You should instead focus on what kind of CPU you should use, since the CPU is the most important part of the server. You want something that [ranks good on single core performance](https://www.cpubenchmark.net/singleThread.html), as a server mainly runs on one thread. Multiple threads are utilised for quite some time now in systems like async chunk loading on paper, however.
+## Donanım Seçimi
+Sadece ne kadar RAM'e ihtiyacınız olduğuna bakmayın. Bunun yerine, hangi türde bir CPU kullanmanız gerektiğine odaklanmalısınız, çünkü CPU sunucunun en önemli parçasıdır. Özellikle sunucu tek bir işlemci çekirdeğinde çalıştığı için [tek çekirdek performansında iyi](https://www.cpubenchmark.net/singleThread.html) bir şey istersiniz. Ancak Paper gibi sistemlerde asenkron yığın yükleme gibi çoklu iş parçacığı uzun süredir kullanılmaktadır.
 
-You should absolutely avoid Hard Drives (HDDs). Their speeds are simply way too slow to justify running a server on them since minecraft is heavy on I/O operations (especially with high view distances and higher player counts). A Solid State drive (SSD) is a far better choice because of it's much faster I/O.
+Kesinlikle Hard Diskleri (HDD'ler) kullanmaktan kaçının. Hızları, minecraft'in giriş/çıkış işlemlerinde (özellikle yüksek görüş mesafeleri ve yüksek oyuncu sayılarıyla) çok yavaştır, bu nedenle bir sunucuyu üzerlerinde çalıştırmayı haklı çıkarmak için. Katı Hal Sürücüsü (SSD), çok daha hızlı giriş/çıkış hızına sa
+
+hip olduğu için çok daha iyi bir seçenektir.
