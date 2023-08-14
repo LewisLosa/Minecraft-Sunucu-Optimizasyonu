@@ -24,7 +24,7 @@ Tavsiye edilen en iyi seçenekler:
 Kaçınılması gerekenler:
 * Herhangi bir ödeme yapmanız gereken async iddiasında bulunan sunucu JAR'ı - %99.99 dolandırıcılık olasılığı vardır.
 * Bukkit/CraftBukkit/Spigot - Diğer sunucu yazılımlarına göre performans açısından son derece eski kalmıştır.
-* Herhangi bir eklentiyi/programı çalışma zamanında etkinleştiren/devre dışı bırakan/yeniden yükleyen yazılım. Nedenini anlamak için [bu bölüme](#Eklentileri-Etkinleştirme/Devre-Dışı-Bırakan-Eklentiler) bakabilirsiniz.
+* Herhangi bir eklentiyi/programı çalışma zamanında etkinleştiren/devre dışı bırakan/yeniden yükleyen yazılım. Nedenini anlamak için [bu bölüme](#eklentileri-etkinleştirmedevre-dışı-bırakan-eklentiler) bakabilirsiniz.
 * Pufferfish veya Purpur'dan daha aşağıda olan birçok dalga, kararsızlık ve diğer sorunlarla karşılaşabilir. Daha fazla performans kazanmaya çalışıyorsanız, sunucunuzu optimize edin veya kişisel bir özel dalga oluşturmak için yatırım yapın.
 
 ## Harita Önceden Oluşturma (Map Pregen)
